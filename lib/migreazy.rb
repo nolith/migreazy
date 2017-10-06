@@ -159,7 +159,7 @@ module Migreazy
     
     class WorkingCopy < Source
       def initialize
-        @migrations = Dir.entries("./db/migrate").select { |entry|
+        @migrations = (Dir.entries("./db/migrate") + Dir.entries("./db/post_migrate")).select { |entry|
           entry =~ /^\d+.*\.rb$/
         }.map { |entry|
           entry.gsub(/^0*(\d+)_.*/, '\1')
